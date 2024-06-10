@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copy Text Example</title>
+    <script>
+        function copyText(id) {
+            /* Get the text content */
+            var text = document.getElementById(id).innerText;
+
+            /* Create a temporary input element */
+            var tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+
+            /* Select the text within the input element */
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text to the clipboard */
+            document.execCommand("copy");
+
+            /* Remove the temporary input element */
+            document.body.removeChild(tempInput);
+
+            /* Alert the user */
+            alert("Copied the text: " + text);
+        }
+    </script>
+</head>
+<body>
+
+    <button onclick="copyText('textToCopy6')">Copy Text 6</button>
+    <button onclick="copyText('textToCopy7')">Copy Text 7</button>
+    <div id="textToCopy6">
+        <p>CREATE TABLE flight (no INT, departure VARCHAR(20), destination VARCHAR(20), distance INT, departs VARCHAR(20), arrives VARCHAR(20), price REAL, PRIMARY KEY (no));
+        <p>CREATE TABLE aircraft (aid INT, aname VARCHAR(20),cruisingrange INT,PRIMARY KEY(aid));
+        <p>CREATE TABLE employees (eid INT, ename VARCHAR(20), salary INT,PRIMARY KEY (eid));
+        <p>CREATE TABLE certified ( eid INT, aid INT, PRIMARY KEY (eid, aid),FOREIGN KEY (eid) REFERENCES employees(eid),FOREIGN KEY (aid) REFERENCES aircraft(aid));</p>
+        <p>INSERT INTO FLIGHT VALUES (1, 'BANGALORE', 'MANGALORE', 360, '10:45:00', '12:00:00', 10000);</p>
+        <p>INSERT INTO FLIGHT VALUES (2, 'BANGALORE', 'DELHI', 5000, '12:15:00', '04:30:00', 25000);</p>
+        <p>INSERT INTO FLIGHT VALUES (3, 'BANGALORE', 'MUMBAI', 3500, '02:15:00', '05:25:00', 30000);</p>
+        <p>INSERT INTO FLIGHT VALUES (4, 'DELHI', 'MUMBAI', 4500, '10:15:00', '12:05:00', 35000);</p>
+        <p>INSERT INTO FLIGHT VALUES (5, 'DELHI', 'FRANKFURT', 18000, '07:15:00', '05:30:00', 90000);</p>
+        <p>INSERT INTO FLIGHT VALUES (6, 'BANGALORE', 'FRANKFURT', 19500, '10:00:00', '07:45:00', 95000);</p>
+        <p>INSERT INTO FLIGHT VALUES (7, 'BANGALORE', 'FRANKFURT', 17000, '12:00:00', '06:30:00', 99000);</p>
+        <p>INSERT INTO AIRCRAFT VALUES (123, 'AIRBUS', 1000);</p>
+        <p>INSERT INTO AIRCRAFT VALUES (302, 'BOEING', 5000);</p>
+        <p>INSERT INTO AIRCRAFT VALUES (306, 'JET01', 5000);</p>
+        <p>INSERT INTO AIRCRAFT VALUES (378, 'AIRBUS380', 8000);</p>
+        <p>INSERT INTO AIRCRAFT VALUES (456, 'AIRCRAFT', 500); </p>
+        <p>INSERT INTO AIRCRAFT VALUES (789, 'AIRCRAFT02', 800); </p>
+        <p>INSERT INTO AIRCRAFT VALUES (951, 'AIRCRAFT03', 1000);</p>
+        <p>INSERT INTO employees VALUES (1,'Ajay',30000);</p>
+        <p>INSERT INTO employees VALUES (2,'Ajith',85000);</p>
+        <p>INSERT INTO employees VALUES (3,'Arnab',50000);</p>
+        <p>INSERT INTO employees VALUES(4,'Harry',45000);</p>
+        <p>INSERT INTO employees VALUES(5,'Ron',90000);</p>
+        <p>INSERT INTO employees VALUES (6,'Josh',75000);</p>
+        <p>INSERT INTO employees VALUES (7,'Ram',100000);</p>
+        <p>INSERT INTO certified VALUES (1,123);</p>
+        <p>INSERT INTO certified VALUES (2,123);</p>
+        <p>INSERT INTO certified VALUES (1,302);</p>
+        <p>INSERT INTO certified VALUES (5,302);</p>
+        <p>INSERT INTO certified VALUES (7,302);</p>
+        <p>INSERT INTO certified VALUES (1,306);</p>
+        <p>INSERT INTO certified VALUES (2,306);</p>
+        <p>INSERT INTO certified VALUES (1,378);</p>
+        <p>INSERT INTO certified VALUES (2,378);</p>
+        <p>INSERT INTO certified VALUES (4,378);</p>
+        <p>INSERT INTO certified VALUES (6,456);</p>
+        <p>INSERT INTO certified VALUES (3,456);</p>
+        <p>INSERT INTO certified VALUES (5,789);</p>
+        <p>INSERT INTO certified VALUES (6,789);</p>
+        <p>INSERT INTO certified VALUES (3,951);</p>
+        <p>INSERT INTO certified VALUES (1,951);</p>
+        <p>INSERT INTO certified VALUES (1,789);</p>
+        <p>SELECT DISTINCT a.aname FROM aircraft a,certified c,employees e WHERE a.aid=c.aid AND c.eid=e.eid AND NOT EXISTS (SELECT * FROM employees e1 WHERE e1.eid=e.eid AND e1.salary>80000);</p>
+        <p>SELECT c.eid, MAX(cruisingrange) from certified c, aircraft a where c.aid = a.aid group by c.eid having count(*)>3;</p>
+        <p>SELECT DISTINCT e.ename from employees e where e.salary < (select MIN(f.price) from flight f where f.departure = ' Bangalore' AND f.destination = ' Frankfurt');</p>
+        <p>SELECT a.aid, a.aname, AVG(e.salary) FROM aircraft a, certified c, employees e WHERE a.aid = c.aid AND c.eid = e.eid AND a.cruisingrange > 1000 GROUP BY a.aid, a.aname;</p>
+        <p>SELECT distinct e. ename from employees e, aircraft a, certified c where e.eid = c.eid AND c.aid = a.aid AND a. aname = “Boeing”;</p>
+        <p>Select aid from aircraft where cruisingrange > (Select min(distance) from flight where frm= “Bangalore” and   too= “Delhi”);</p>
+
+    </div>
+    
+
+    <br>
+
+    
+    <div id="textToCopy7">
+        <p>CREATE TABLE STUDENT(USN CHAR(10),SNAME VARCHAR(20),ADDRESS VARCHAR(25),   PHONE INT(10),GENDER CHAR,CONSTRAINT A PRIMARY KEY(USN));</p>
+        <p>CREATE TABLE SEMSEC(SSID CHAR(2),SEM INT(1),SEC CHAR,CONSTRAINT B PRIMARY KEY(SSID),CONSTRAINT C CHECK(SEM BETWEEN 1 AND 8));</p>
+        <p>CREATE TABLE CLASS(USN CHAR(10),SSID CHAR(2),CONSTRAINT D PRIMARY KEY(USN,SSID),CONSTRAINT E FOREIGN KEY(USN) REFERENCES STUDENT(USN) ON DELETE CASCADE,CONSTRAINT F FOREIGN KEY(SSID) REFERENCES SEMSEC(SSID) ON DELETE CASCADE);</p>
+        <p>CREATE TABLE SUBJECT(SUBCODE VARCHAR(7),TITLE VARCHAR(20),SEM INT(1),  CREDITS INT(1),CONSTRAINT G PRIMARY KEY(SUBCODE));</p>
+        <p>CREATE TABLE IAMARKS(USN CHAR(10),SUBCODE VARCHAR(7),SSID CHAR(2), TEST1 INT(2),TEST2 INT(2),TEST3 INT(2),FINALIA INT(2),    CONSTRAINT H PRIMARY KEY(USN,SUBCODE,SSID),    CONSTRAINT I FOREIGN KEY(USN) REFERENCES STUDENT(USN) ON DELETE CASCADE,CONSTRAINT J FOREIGN KEY(SSID) REFERENCES SEMSEC(SSID) ON DELETE CASCADE,CONSTRAINT K FOREIGN KEY(SUBCODE) REFERENCES SUBJECT(SUBCODE) ON DELETE CASCADE);</p>
+        <p>INSERT INTO STUDENT  VALUES ('1MV17CS001','AASHISH','BANGALORE',1020304050,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV17CS060','NAELA','MYSORE',1122334455,'F');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV17CS130','MILIND','JAMMU',506070809,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV16CS001','ABHIJITH','PUNE',998877655,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV16CS060','NIKITHA','HYDERABAD',900706050,'F');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV16CS130','SANJANA','GUWAHATTI',124567890,'F');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV15CS001','ANSHUMAN','PANAJI',111223334,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV15CS060','AMRUTHA','BANGALORE',102003004,'F');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV15CS130','BHUVANESH','JAIPUR',900007006,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV14CS001','DEVAYANI','BANGALORE',1020030,'F');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV14CS060','DAVID','KOCHI',90080070,'M');</p>
+        <p>INSERT INTO STUDENT  VALUES('1MV14CS130','AISHWARYA','MUMBAI',100020000,'F');</p>
+        <p>INSERT INTO SEMSEC VALUES ('2A',2,'A');</p>
+        <p>INSERT INTO SEMSEC VALUES('2B',2,'B');</p>
+        <p>INSERT INTO SEMSEC VALUES('2C',2,'C');</p>
+        <p>INSERT INTO SEMSEC VALUES('4A',4,'A');</p>
+        <p>INSERT INTO SEMSEC VALUES('4B',4,'B');</p>
+        <p>INSERT INTO SEMSEC VALUES('4C',4,'C');</p>
+        <p>INSERT INTO SEMSEC VALUES('6A',6,'A');</p>
+        <p>INSERT INTO SEMSEC VALUES('6B',6,'B');</p>
+        <p>INSERT INTO SEMSEC VALUES('6C',6,'C');</p>
+        <p>INSERT INTO SEMSEC VALUES('8A',8,'A');</p>
+        <p>INSERT INTO SEMSEC VALUES('8B',8,'B');</p>
+        <p>INSERT INTO SEMSEC VALUES('8C',8,'C');</p>
+        <p>INSERT INTO CLASS VALUES ('1MV17CS001','2A');</p>
+        <p>INSERT INTO CLASS VALUES('1MV17CS060','2B');</p>
+        <p>INSERT INTO CLASS VALUES('1MV17CS130','2C');</p>
+        <p>INSERT INTO CLASS VALUES('1MV16CS001','4A');</p>
+        <p>INSERT INTO CLASS VALUES('1MV16CS060','4B');</p>
+        <p>INSERT INTO CLASS VALUES('1MV16CS130','4C');</p>
+        <p>INSERT INTO CLASS VALUES('1MV15CS001','6A');</p>
+        <p>INSERT INTO CLASS VALUES('1MV15CS060','6B');</p>
+        <p>INSERT INTO CLASS VALUES('1MV15CS130','6C');</p>
+        <p>INSERT INTO CLASS VALUES('1MV14CS001','8A');</p>
+        <p>INSERT INTO CLASS VALUES('1MV14CS060','8B');</p>
+        <p>INSERT INTO CLASS VALUES('1MV14CS130','8C');</p>
+        <p>INSERT INTO SUBJECT VALUES ('15CS21','M2',2,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('15PCD23','PCD',2,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('15CS42','SE',4,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('15CS44','MP',4,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('15CS64','CG',6,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('15CS62','USP',6,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('10CS81','SA',8,4);</p>
+        <p>INSERT INTO SUBJECT VALUES  ('10CS842','ST',8,3);</p>
+        <p>INSERT INTO IAMARKS (usn,subcode,ssid,test1,test2,test3) values('1MV17CS001','15CS21','2A',15,14,13),('1MV17CS060','15PCD23','2B',15,15,14),('1MV17CS130','15CS21','2C',11,12,13),('1MV16CS001','15CS42','4A',19,19,18),('1MV16CS060','15CS44','4B',5,8,5),('1MV16CS130','15CS42','4C',20,20,20),('1MV15CS001','15CS64','6A',12,12,12),('1MV15CS060','15CS62','6B',18,19,20),('1MV15CS130','15CS64','6C',8,12,11),('1MV14CS001','10CS81','8A',3,11,12),('1MV14CS060','10CS842','8B',0,0,7),('1MV14CS130','10CS81','8C',0,0,20);</p>
+        <p>SELECT S.USN,S.SNAME,S.ADDRESS,S.PHONE,S.GENDER FROM STUDENT S,CLASS C,SEMSEC SS  WHERE S.USN=C.USN AND SS.SSID=C.SSID   AND SS.SEM=4 AND SS.SEC='C';</p>
+        <p>SELECT SS.SEM,SS.SEC,S.GENDER,COUNT(S.GENDER)   FROM STUDENT S,SEMSEC SS,CLASS C   WHERE S.USN=C.USN  AND  SS.SSID=C.SSID   GROUP BY SS.SEM,SS.SEC,S.GENDER;</p>
+        <p>CREATE VIEW TEST1_MARKS AS SELECT USN,SUBCODE,TEST1  FROM IAMARKS  WHERE USN='1MV15CS060';</p>
+        <p>UPDATE IAMARKS SET TEST1=19,TEST2=18,TEST3=17 WHERE USN='1MV14CS001';</p>
+        <p>UPDATE IAMARKS SET TEST1=11,TEST2=0,TEST3=14 WHERE USN='1MV14CS060';</p>
+        <p>UPDATE IAMARKS SET TEST1=10,TEST2=0,TEST3=7 WHERE USN='1MV14CS130';</p>
+        <p>UPDATE IAMARKS SET FINALIA= (GREATEST((Test1+Test2), (Test2+Test3), (Test3+Test1))/2);</p>
+        <p>SELECT S.USN,S.SNAME,S.ADDRESS,S.PHONE,S.GENDER,IA.SSID,( CASE WHEN IA.FINALIA BETWEEN 17 AND 20 THEN 'OUTSTANDING' WHEN IA.FINALIA BETWEEN 12 AND 16 THEN 'AVERAGE' ELSE 'WEAK' END) AS CAT    FROM STUDENT S,SEMSEC SS,IAMARKS IA    WHERE S.USN=IA.USN    AND    SS.SSID=IA.SSID AND    SS.SEM=8;</p>
+        <p>UPDATE IAMARKS SET FINALIA=NULL;</p>
+
+
+    </div>
+
+    
+    
+
+</body>
+</html>
